@@ -7,7 +7,10 @@ using UnityEngine.UI;
 
 public class cardspawner : MonoBehaviour
 {
-
+    [SerializeField] public Sprite[] cardsList;
+    public Canvas canvas;
+    public int cardsX;
+    public int cardsY;
     public GameObject Card;
     public int rows = 4;
     public int cols = 4;
@@ -23,37 +26,38 @@ public class cardspawner : MonoBehaviour
             {
 
                 GameObject cardInstance = Instantiate(Card, cardGrid[i,j], transform.rotation);
-
+                cardInstance.transform.SetParent(canvas.transform);
                // Image guiImage = cardInstance.AddComponent<Image>();
 
                 // 3. Assign the Sprite asset
                 //guiImage.sprite = Resources.Load<Sprite>("Assets/Memory Game Cards/Memory_Game_Circle.png");
             }
         }
+        Debug.Log(cardsList[0].ToString());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+       // reset();
     }
 
     public void reset()
     {
-        int originalX = 0;
-        int originalY = 0;
+        //int originalX = 150;
+       // int originalY = 0;
 
         int width = 180;
-        int height = 166;
+        int height = 185;
         int gap = 20;
         for (int i = 0; i < rows; i++)
         {
             for (int j = 0; j < cols; j++)
             {
-                int x = originalX + width * i + gap;
-                int y = originalY + height * j + gap;
-                Debug.Log("---\n");
-                Debug.Log(x.ToString() + ", " + y.ToString());
+                int x = cardsX + width * i + gap;
+                int y = cardsY + height * j + gap;
+                //Debug.Log("---\n");
+                //Debug.Log(x.ToString() + ", " + y.ToString());
                 cardGrid[i,j] = new Vector2(x, y);
             }
         }

@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Memory_Game_Question_Mark_0: 3699951116756449619
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
