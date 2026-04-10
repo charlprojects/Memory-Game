@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 726983d646f123743b11754fe2f0e576
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - CardImage: {fileID: 2033959136704490151, guid: a9dba2612151709488a238a0a50e6506, type: 3}
+  - gameManager: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
