@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManagerCard : MonoBehaviour
 {
@@ -12,6 +13,12 @@ public class GameManagerCard : MonoBehaviour
     public Sprite cardBack;
     public Sprite cardFront;
     public Sprite[] cardFaces;
+    public int matchesFound = 0;
+    public int failedMatches = 0;
+    public Text matchesText;
+    public Text goodJob;
+    public Button restartButton;
+    public float targetTime = 0.0f;
 
     public List<Card> cards = new List<Card>();
 
@@ -27,6 +34,23 @@ public class GameManagerCard : MonoBehaviour
     void Start()
     {
         CreateCards();
+    }
+
+    private void Update()
+    {
+        if (!(matchesFound >= 8))
+        {
+            targetTime += Time.deltaTime;
+            goodJob.gameObject.SetActive(false);
+            restartButton.gameObject.SetActive(false);
+        } else
+        {
+            goodJob.gameObject.SetActive(true);
+            restartButton.gameObject.SetActive(true);
+        }
+            matchesText.text = $@"Time: {Mathf.Ceil(targetTime)}s 
+Matches: {matchesFound.ToString()}
+Failures:  {failedMatches.ToString()}";
     }
 
     void Shuffle<T>(List<T> inputList)
@@ -91,6 +115,7 @@ public class GameManagerCard : MonoBehaviour
         if (firstC.cardNum == secondC.cardNum)
         {
             Debug.Log("Match");
+            matchesFound++;
             //firstC.gameObject.SetActive(false);
             //secondC.gameObject.SetActive(false);
             //firstC.HideCard();
@@ -99,6 +124,7 @@ public class GameManagerCard : MonoBehaviour
         else
         {
             Debug.Log("No match");
+            failedMatches++;
 
 
             firstC.HideCard();
