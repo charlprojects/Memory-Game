@@ -6,7 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/GameScene.unity
+    path: Assets/Scenes/MemoryGame.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/BlackHoleSolitaire.unity
+    guid: 6e0b7f37e112b2b48ad912bfe2f7b1e1
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

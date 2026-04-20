@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManagerCard : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class GameManagerCard : MonoBehaviour
     public Text goodJob;
     public Button restartButton;
     public float targetTime = 0.0f;
+    public Button switchGameButton;
 
     public List<Card> cards = new List<Card>();
 
@@ -43,10 +45,13 @@ public class GameManagerCard : MonoBehaviour
             targetTime += Time.deltaTime;
             goodJob.gameObject.SetActive(false);
             restartButton.gameObject.SetActive(false);
+            switchGameButton.gameObject.SetActive(false);
+            
         } else
         {
             goodJob.gameObject.SetActive(true);
             restartButton.gameObject.SetActive(true);
+            switchGameButton.gameObject.SetActive(true);
         }
             matchesText.text = $@"Time: {Mathf.Ceil(targetTime)}s 
 Matches: {matchesFound.ToString()}
@@ -111,24 +116,43 @@ Failures:  {failedMatches.ToString()}";
     {
         if (firstC == null || secondC == null)
             return;
-
-        if (firstC.cardNum == secondC.cardNum)
+        if (matchesFound <= 8)
         {
-            Debug.Log("Match");
-            matchesFound++;
-            //firstC.gameObject.SetActive(false);
-            //secondC.gameObject.SetActive(false);
-            //firstC.HideCard();
-            //secondC.HideCard();
+            if (firstC.cardNum == secondC.cardNum)
+            {
+                Debug.Log("Match");
+                matchesFound++;
+                //firstC.gameObject.SetActive(false);
+                //secondC.gameObject.SetActive(false);
+                //firstC.HideCard();
+                //secondC.HideCard();
+            }
+            else
+            {
+                Debug.Log("No match");
+                failedMatches++;
+
+
+                firstC.Invoke("HideCard", .25f);
+                secondC.Invoke("HideCard", .25f);
+            }
         }
-        else
+    }
+    public void RestartGame()
+    {
+        matchesFound = 0;
+        failedMatches = 0;
+        targetTime = 0.0f;
+        foreach (Card card in cards)
         {
-            Debug.Log("No match");
-            failedMatches++;
-
-
-            firstC.HideCard();
-            secondC.HideCard();
+            Destroy(card.gameObject);
         }
+        cards.Clear();
+        CreateCards();
+    }
+
+    public void SwitchGame()
+    {
+        SceneManager.LoadScene("BlackHoleSolitaire");
     }
 }
