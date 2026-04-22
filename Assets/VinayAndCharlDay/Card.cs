@@ -30,11 +30,14 @@ public class Card : MonoBehaviour
 
         //if (isFlipped)
         //    return;
+        if (!isFlipped)
+        {
+            isFlipped = true;
 
-        isFlipped = true;
-
-        CardImage.sprite = gameManager.cardFaces[cardNum];
-        gameManager.CardFlipped(this);
+            CardImage.sprite = gameManager.cardFaces[cardNum];
+            gameManager.CardFlipped(this);
+        }
+        
 
     }
 
@@ -44,4 +47,3 @@ public class Card : MonoBehaviour
         CardImage.sprite = gameManager.cardBack;
     }
 }
-

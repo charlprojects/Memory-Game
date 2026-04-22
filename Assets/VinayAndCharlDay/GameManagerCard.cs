@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class GameManagerCard : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class GameManagerCard : MonoBehaviour
     public Button restartButton;
     public float targetTime = 0.0f;
     public Button switchGameButton;
+    public Button quitGameButton;
 
     public List<Card> cards = new List<Card>();
 
@@ -134,10 +136,13 @@ Failures:  {failedMatches.ToString()}";
 
 
                 firstC.Invoke("HideCard", .25f);
+                //secondC.HideCard();
                 secondC.Invoke("HideCard", .25f);
             }
         }
     }
+
+
     public void RestartGame()
     {
         matchesFound = 0;
@@ -154,5 +159,13 @@ Failures:  {failedMatches.ToString()}";
     public void SwitchGame()
     {
         SceneManager.LoadScene("BlackHoleSolitaire");
+
+    }
+
+    public void QuitGame()
+    {
+        
+        Application.Quit();
+        UnityEditor.EditorApplication.isPlaying = false;
     }
 }
